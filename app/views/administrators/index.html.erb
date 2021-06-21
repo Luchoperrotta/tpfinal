@@ -1,0 +1,43 @@
+<h1>Manage Users</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Full Name</th>
+      <th>Username</th>
+      <th>Admin?</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if can? :index, :administrator %>
+      <% @users.each do |user| %>
+        <tr>
+          <td><strong><%= user.last_name %>, </strong><%= user.first_name %></td>
+          <td><%= user.username %></td>
+          <td><%= (user.id == 3) ? "SuperAdmin!" : user.admin? %></td>
+          <td>
+            <% if can? :toggle_admin, :administrator %>
+              <% if user.admin? %>
+                <%= link_to "Remove Administrator", toggle_admin_url(id: user.id), class: 'btn btn-danger' %>
+              <% else %> 
+                <%= link_to "Add Administrator", toggle_admin_url(id: user.id), class: 'btn btn-success' %>
+              <% end %>
+            <% else %>
+              <strong>NOT ALLOWED FOR YOU!</strong>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+    <tr>
+      <td colspan="4">
+        <div class="alert alert-warning">
+          Ud. no tiene permiso para ver <strong>Administradores de Sistema!</strong>
+        </div>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

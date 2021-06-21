@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<h1>PRODUCTOS</h1>
+
+<!-- .table-{color} can be use with .table, thead, tbody, tr, th and td -->
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">NOMBRE</th>
+      <th scope="col">PRECIO</th>
+      <th scope="col">CUOTAS</th>
+      <th scope="col">ESTADO</th>
+      <th scope="col">OFERTA</th>
+      <th scope="col">STOCK</th>
+      <th scope="col">DESCUENTO</th>
+      <th scope="col">BANCO</th>
+      <th scope="col">TIPO DE ENVIO</th>
+      <th scope="col">CATEGORIA</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @products.each do |product| %>
+     <tr class="table-primary">
+        <td><%= product.name %></td>
+        <td> $ <%= product.price %></td>
+        <td><%= product.quota %></td>
+        <td><%= raw iconify_active(product.active) %></td>
+        <td><%= raw icono_oferta(product.onsale) %></td>
+        <td><%= product.stock %></td>
+        <td><%= product.discountPercentage %>%</td>
+        <td><%= product.bank.name %></td>
+        <td><%= product.delivery.name %></td>
+        <td><%= product.category.name %></td>
+        
+        <td><%= button_to "agregar al carrito", line_items_path(:product_id => product.id) %></td>
+        <td><%= link_to 'Show', product %></td>
+        <td><%= link_to 'Edit', edit_product_path(product) %></td>
+        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+  <%= paginate @products %>
+
+
+
+
+<%= link_to 'Publicar Producto', new_product_path, class: 'btn btn-primary'  %>

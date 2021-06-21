@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Nuestros Beneficios</h1>
+
+
+<br>
+
+
+
+
+
+<div class="card text-white bg-primary">
+<div class="card-header">Beneficios!!!</div>
+<div class="card-footer text-muted bg-light"></div>
+  <% @profits.each do |profit| %>
+ 
+  <div class="card-body-group">
+ 
+
+    <h5 class="card-title"><%= profit.name %></h5>
+    <p class="card-text">WOW!</p>
+        
+        
+  </div>
+ <div class="card-footer text-muted bg-light"></div>
+ 
+  <% end %>
+  
+</div>
+
+<%= link_to 'New Profit', new_profit_path, class: 'btn text-white btn-secondary' %>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   
+
+    <!-- CSS only -->
+    
+ 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+
+  </head>
+
+  <body>
+    
+
+
+    <%= render 'shared/main_menu' %>
+     <%= @current_cart.inspect %>
+     <br>
+     <%= @current_cart.line_items.inspect %>
+    
+  <%= yield %>
+
+        <code>
+          <hr>
+          <strong>testeo:</strong>
+          hay alguien en sesion?: <%= user_signed_in? %><br>
+          Current User: <%= current_user.inspect %>
+          <hr>
+          Can Manage ALL? <%= can? :manage, :all %><br>
+          Can Manage Products? <%= can? :manage, Product %><br>
+          Can Manaje bancos? <%= can? :manage, Bank %><br>
+          Can Manage carrito? <%= can? :manage, Cart %><br>
+          Can Manage envios? <%= can? :manage, Delivery %><br>
+          Can Manage pago? <%= can? :manage, Order %><br>
+          Can Manage Puntos? <%= can? :manage, Point %><br>
+          Can Manage perfil? <%= can? :manage, Profile %><br>
+          Can Manage beneficios? <%= can? :manage, Profit %><br>
+          Can Manage Categories? <%= can? :manage, Category %><br>
+          Can Index Administrators? <%= can? :index, :administrator %><br>
+          Can Toggle Administrators? <%= can? :toggle_admin, :administrator %><br>
+        </code>
+     
+
+    
+    
+    <%= render 'shared/footer' %>
+  </body>
+</html>

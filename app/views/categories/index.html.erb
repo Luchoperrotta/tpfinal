@@ -1,0 +1,30 @@
+
+<div class="row row-cols-1 row-cols-sm-2 g-3">
+<% @categories.each do |category| %>
+  <div class="card">
+  
+     <td>
+          <% if category.image.attached? %>
+            <%= image_tag category.image, width: '250px', height: '200px' %>
+          <% end %>
+    </td>
+
+    <div class="card-body">
+      <h5 class="card-title">
+      <td><%= link_to category.name, products_path(:category_id => category.id) %></td>
+      </h5>
+      
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">
+        <td><%= button_to  'Show', category, class: 'btn btn-info' %></td>
+        <td><%= button_to  'Edit', edit_category_path(category), class: 'btn btn-warning' %></td>
+        <td><%= button_to  'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+      </small>
+    </div>
+  </div>
+  <% end %>
+  
+  
+</div>
+<%= button_to 'New Category', new_category_path, class: 'btn btn-success' %>

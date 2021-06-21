@@ -1,0 +1,62 @@
+<!-- <h1>Products (Store View)</h1> -->
+<h1>
+  <%= t('.title') %>
+  <% if params[:category] %>
+    / <strong><%= Category.find(params[:category]).name %></strong>
+  <% end %>
+</h1>
+
+<div class="row row-cols-1 row-cols-sm-2 g-3">
+
+  <% if @products.size > 0 %>
+    <% @products.each do |product| %>
+      <div class="col">
+      <div class="spinner-grow text-primary" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+        <div class="card">
+          <%= raw product_on_sale?(product) %>
+          <!-- <img src="assets/images/bs-images/img-2x1.png" class="card-img-top" alt="card-grid-image"> -->
+          <!--%= image_tag product.image_url, class: 'card-img-top w-50 h-50' %-->
+          <div class="card-body">
+          <td>
+            <% if product.image.attached? %>
+            <%= image_tag product.image, width: '250px', height: '200px' %>
+          <% end %>
+          </td>
+            <h5 class="card-title">
+            
+              <strong><%= product.name %></strong>
+              <% if product.discountPercentage > 0 %>
+                <span class="text-end float-right badge bg-success"> <%= product.discountPercentage %>% OFF </span>
+              <% end %>
+              <br>
+
+              <small>(<%= product.category.name %>)</small>
+            </h5>
+            <p class="card-text">
+              <%= product.description %>
+              <hr>
+              <strong>Price: </strong>
+              $<%= price_calculate(product) %>
+              <% if product.discountPercentage > 0 %>
+                <p>Antes: <del>$<%= product.price %></del><br></p>
+              <% end %>
+              <%#= number_to_currency(product.price, :unit => "ARS $") %>
+              <hr>
+              <%= link_to 'SHOW', product, class: 'btn btn-sm btn-outline-secondary' %>
+              <%= check_stock(product) if user_signed_in? %>
+            </p>
+            <div class="card-footer">
+              <small class="text-muted">Last updated:<br><%= product.updated_at %></small>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="alert alert-warning">
+      <strong> <%= t('.sorry') %>  </strong>
+    </div>
+  <% end %>
+</div>

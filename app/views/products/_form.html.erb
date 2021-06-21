@@ -1,0 +1,96 @@
+<%= form_with(model: product) do |form| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+        <% product.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nombre %>
+     <input type="text" class="form-control" placeholder="ingrese el nombre del producto"  <%= form.text_field :name %>
+  </div>
+
+
+
+  <div class="field">
+    <%= form.label :precio %>
+     <input type="number" class="form-control" placeholder="ingrese el nombre del producto"<%= form.text_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :descripcion %>
+    <input type="text" class="form-control" placeholder="ingrese una descripcion del producto"<%= form.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cuotas %>
+     <input type="number" class="form-control" placeholder="ingrese la cantidad de cuotas"<%= form.number_field :quota %>
+  </div>
+
+  <div class="field">
+    <%= form.label :interes %>
+    <input type="number" class="form-control" placeholder="ingrese el interes a aplicar"<%= form.number_field :interest %>
+  </div>
+
+  <div class="field">
+    <%= form.label :activo %>
+    <%= form.check_box :active %>
+  </div>
+
+
+
+
+
+  <div class="field">
+    <%= form.label :oferta %>
+    <%= form.check_box :onsale %>
+  </div>
+
+  <div class="field">
+    <%= form.label :stock %>
+    <input type="number" class="form-control" placeholder="ingrese cuantos productos tiene a la venta"<%= form.number_field :stock %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Descuento %>
+    <input type="number" class="form-control" placeholder="ingrese la cantidad de descuento que quiere aplicar al producto"<%= form.number_field :discountPercentage %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bank_id %>
+    <%= form.collection_select(:bank_id, Bank.all,:id, :name) %>
+
+  </div>
+
+  <div class="field">
+    <%= form.label :delivery_id %>
+    <%= form.collection_select(:delivery_id, Delivery.all,:id, :name) %>
+
+  </div>
+
+  <div class="field">
+    <%= form.label :category_id %>
+    <%= form.collection_select(:category_id, Category.all,:id, :name) %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :image, class:"form-label" %>
+    <%= form.file_field :image, class: "form-control" %>
+    <small class="badge bg-primary">has attached image?: <%= @product.image.attached %> </small>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+
+
+
